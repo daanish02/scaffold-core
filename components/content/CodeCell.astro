@@ -1,0 +1,59 @@
+---
+export interface Props {
+  lang?: string;
+}
+const { lang } = Astro.props;
+const code = await Astro.slots.render("default");
+---
+
+<div class="code-cell">
+  <pre class="code" data-lang={lang}><code set:html={code} /></pre>
+  <button type="button" class="copy-btn" aria-label="Copy code">Copy</button>
+</div>
+
+<style>
+  .code-cell {
+    position: relative;
+  }
+  .copy-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-family: var(--sans);
+    font-size: 12px;
+    background: var(--bg-raised);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 4px 10px;
+    color: var(--ink-soft);
+    cursor: pointer;
+  }
+  .copy-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent-ink);
+  }
+  .copy-btn.copied {
+    color: var(--accent-ink);
+    border-color: var(--accent);
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>(".code-cell .copy-btn").forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      const pre = btn.previousElementSibling as HTMLElement | null;
+      const text = pre?.textContent ?? "";
+      try {
+        await navigator.clipboard.writeText(text);
+        btn.textContent = "Copied";
+        btn.classList.add("copied");
+        setTimeout(() => {
+          btn.textContent = "Copy";
+          btn.classList.remove("copied");
+        }, 1500);
+      } catch {
+        // clipboard API unavailable — no-op, button stays "Copy"
+      }
+    });
+  });
+</script>

@@ -1,0 +1,12 @@
+---
+export interface Props {
+  /** Heading shown above the callout body, e.g. "Common pitfall". */
+  label?: string;
+}
+const { label = "Common pitfall" } = Astro.props;
+---
+
+<div class="callout">
+  <strong>{label}</strong>
+  <slot />
+</div>

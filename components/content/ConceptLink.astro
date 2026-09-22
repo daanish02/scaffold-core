@@ -1,0 +1,25 @@
+---
+import kbs from "../../registry/kbs.json";
+import { parseConceptId } from "../../astro/content-schema.ts";
+
+export interface Props {
+  id: string;
+  /** Override the link text; defaults to the concept slug from the id. */
+  label?: string;
+}
+const { id, label } = Astro.props;
+
+const { kb, section, concept } = parseConceptId(id);
+const entry = kbs.find((k) => k.name === kb);
+if (!entry) {
+  throw new Error(`ConceptLink: unknown kb "${kb}" in id "${id}" — not found in registry/kbs.json`);
+}
+
+const href = `${entry.url}/${section}/${concept}`;
+const text = label ?? concept.replace(/-/g, " ");
+---
+
+<a class="chip" href={href}>
+  <span class="kb-tag">{kb}</span>
+  {text}
+</a>

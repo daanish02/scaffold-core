@@ -387,6 +387,30 @@ input[type="range"] {
   line-height: 1.5;
 }
 
+.step-nav {
+  display: flex;
+  gap: 10px;
+  font-family: var(--sans);
+}
+.step-nav-btn {
+  flex: 1;
+  background: var(--bg-raised);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 8px 14px;
+  font-size: 13px;
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+.step-nav-btn:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
+.step-nav-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
 footer.family {
   max-width: 640px;
   margin: 60px auto 0;

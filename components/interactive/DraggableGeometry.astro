@@ -1,0 +1,8 @@
+---
+import DraggableGeometry, { type DraggableGeometryProps } from "./DraggableGeometry.tsx";
+
+export interface Props extends DraggableGeometryProps {}
+const props = Astro.props;
+---
+
+<DraggableGeometry {...props} client:visible />

@@ -1,0 +1,8 @@
+---
+import StepThrough, { type StepThroughProps } from "./StepThrough.tsx";
+
+export interface Props extends StepThroughProps {}
+const props = Astro.props;
+---
+
+<StepThrough {...props} client:visible />

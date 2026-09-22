@@ -27,24 +27,30 @@ export default defineConfig({
 
 `scaffold()` wires up MDX, KaTeX (via remark-math/rehype-katex), React (for `.tsx` interactive components), and Pagefind search.
 
-Import components directly from the package:
+Import components directly from the package. In `.mdx` content, use the `.astro`-wrapped version of any interactive component (it bakes in the `client:*` directive MDX's JSX parser can't express itself):
 
 ```mdx
 import Callout from "@daanish02/scaffold-core/components/content/Callout.astro";
-import TransformViz from "@daanish02/scaffold-core/components/interactive/TransformViz.tsx";
+import TransformViz from "@daanish02/scaffold-core/components/interactive/TransformViz.astro";
 ```
+
+The raw `.tsx` is still there for `.astro` files, which can pass `client:*` directives directly.
+
+Concept page routing (`getStaticPaths`, sidebar-building) is also shared — see `astro/concept-page.ts`'s `getConceptStaticPaths`/`buildSidebarGroups`/`getConnectsToIds`, consumed from a KB's `src/pages/[section]/[concept].astro`.
 
 See [`docs/AUTHORING.md`](docs/AUTHORING.md) for the concept-page authoring pattern and [`docs/scaffold-brief.md`](docs/scaffold-brief.md) for the full project brief.
 
 ## Package structure
 
 ```
-astro/        scaffold() integration, config defaults, content-schema.ts (Zod)
+astro/        scaffold() integration, config defaults, content-schema.ts (Zod),
+               concept-page.ts (getStaticPaths/sidebar helpers for KB routes)
 components/
-  layout/     Header, Footer, Sidebar, KBFamilyNav
+  layout/     Header, Footer, Sidebar, KBFamilyNav, SearchModal, TableOfContents
   notation/   SymbolTooltip, NotationSheet
   interactive/  ParamSlider, TransformViz, DraggableGeometry, StepThrough,
                 GradientDescentPlayground, DistributionExplorer, PyodideCell, SelfCheck
+                — each also has an .astro wrapper (client:visible baked in) for use in .mdx
   graph/      PrereqGraph — directed prerequisite DAG, global + local modes
   content/    ConceptLink, Callout, CodeCell
 styles/       tokens.css, base.css, theme.ts (light/dark/system)

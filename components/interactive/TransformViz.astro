@@ -1,0 +1,12 @@
+---
+// MDX-ready wrapper: MDX's JSX parser doesn't understand Astro's client:*
+// directives when a .tsx component is imported directly into a .mdx file,
+// so every interactive ships a pre-wrapped .astro version with the
+// directive baked in — import this in concept pages, not the raw .tsx.
+import TransformViz, { type TransformVizProps } from "./TransformViz.tsx";
+
+export interface Props extends TransformVizProps {}
+const props = Astro.props;
+---
+
+<TransformViz {...props} client:visible />

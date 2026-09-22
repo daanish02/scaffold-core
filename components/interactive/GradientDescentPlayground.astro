@@ -1,0 +1,10 @@
+---
+import GradientDescentPlayground, {
+  type GradientDescentPlaygroundProps,
+} from "./GradientDescentPlayground.tsx";
+
+export interface Props extends GradientDescentPlaygroundProps {}
+const props = Astro.props;
+---
+
+<GradientDescentPlayground {...props} client:visible />

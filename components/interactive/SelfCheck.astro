@@ -1,0 +1,8 @@
+---
+import SelfCheck, { type SelfCheckProps } from "./SelfCheck.tsx";
+
+export interface Props extends SelfCheckProps {}
+const props = Astro.props;
+---
+
+<SelfCheck {...props} client:visible />

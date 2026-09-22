@@ -1,0 +1,8 @@
+---
+import PyodideCell, { type PyodideCellProps } from "./PyodideCell.tsx";
+
+export interface Props extends PyodideCellProps {}
+const props = Astro.props;
+---
+
+<PyodideCell {...props} client:visible />

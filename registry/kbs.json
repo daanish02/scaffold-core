@@ -1,0 +1,44 @@
+[
+  {
+    "name": "math",
+    "url": "https://daanish02.github.io/scaffold-math",
+    "tagline": "Scaffold · Math — interactive reference and learning material for math",
+    "status": "planned"
+  },
+  {
+    "name": "cs",
+    "url": "https://daanish02.github.io/scaffold-cs",
+    "tagline": "Scaffold · CS — interactive reference and learning material for CS",
+    "status": "planned"
+  },
+  {
+    "name": "hardware",
+    "url": "https://daanish02.github.io/scaffold-hardware",
+    "tagline": "Scaffold · Hardware — interactive reference and learning material for hardware",
+    "status": "planned"
+  },
+  {
+    "name": "ml",
+    "url": "https://daanish02.github.io/scaffold-ml",
+    "tagline": "Scaffold · ML — interactive reference and learning material for ML",
+    "status": "planned"
+  },
+  {
+    "name": "dl",
+    "url": "https://daanish02.github.io/scaffold-dl",
+    "tagline": "Scaffold · DL — interactive reference and learning material for DL",
+    "status": "planned"
+  },
+  {
+    "name": "applied-dl",
+    "url": "https://daanish02.github.io/scaffold-applied-dl",
+    "tagline": "Scaffold · Applied DL — interactive reference and learning material for applied DL",
+    "status": "planned"
+  },
+  {
+    "name": "econ-finance",
+    "url": "https://daanish02.github.io/scaffold-econ-finance",
+    "tagline": "Scaffold · Econ & Finance — interactive reference and learning material for economics and finance",
+    "status": "planned"
+  }
+]

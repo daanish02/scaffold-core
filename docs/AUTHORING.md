@@ -20,6 +20,21 @@ Write concept pages in this order. Not every section needs to be long — some c
 
 Leads the page if a demo explains the concept better than prose would. Pull from `components/interactive/` — `TransformViz`, `GradientDescentPlayground`, `DistributionExplorer`, `DraggableGeometry`, `StepThrough` — or build a concept-specific one using `ParamSlider` as the shared control primitive.
 
+If nothing in `components/interactive/` fits — most concepts outside math/ML won't have a ready-made component (a Git commit DAG, a cache-hierarchy diagram, an options-payoff chart) — don't wait for a new core component to be built. Write the visual inline as freeform HTML/CSS/JS (a `<canvas>`, inline SVG, or plain DOM), wrapped in `Demo` for consistent chrome:
+
+```mdx
+import Demo from "@daanish02/scaffold-core/components/interactive/Demo.astro";
+
+<Demo title="Interactive · Commit graph" hint="click a commit">
+  <canvas id="commit-graph" width="600" height="300"></canvas>
+  <script>
+    // plain JS, reads CSS custom properties (--accent, --ink, etc.) for theming
+  </script>
+</Demo>
+```
+
+Use the design tokens (`var(--accent)`, `var(--ink-soft)`, etc. — see `styles/tokens.css`) so it matches the rest of the page in both light and dark mode, the same way `TransformViz` reads them via `getComputedStyle`. Promote it into a real `components/interactive/*.tsx` component in core only once a second KB needs the same shape — most one-off visuals should just stay inline.
+
 If the concept doesn't have an obvious visual, it's fine to skip this section — don't force an interactive where a diagram or nothing serves better.
 
 If the interactive has numeric parameters a formula depends on (e.g. a transformation matrix, a learning rate), show that formula live next to the controls, updating as the parameters change — seeing the equation track the slider is a bigger clarity win than only showing it later in "Formal definition." Skip this if the demo isn't formula-driven; not every interactive needs an equation attached.

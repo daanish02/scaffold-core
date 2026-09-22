@@ -1,0 +1,19 @@
+---
+export interface Props {
+  /** Shown in the header bar, e.g. "Interactive · Commit graph". */
+  title: string;
+  /** Optional right-aligned hint, e.g. "drag or use sliders". */
+  hint?: string;
+}
+const { title, hint } = Astro.props;
+---
+
+<div class="demo">
+  <div class="demo-header">
+    <span>{title}</span>
+    {hint && <span>{hint}</span>}
+  </div>
+  <div class="demo-body">
+    <slot />
+  </div>
+</div>

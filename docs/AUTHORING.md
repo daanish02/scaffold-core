@@ -18,7 +18,7 @@ Write concept pages in this order. Not every section needs to be long — some c
 
 ### 2. Visual / interactive
 
-Leads the page if a demo explains the concept better than prose would. Pull from `components/interactive/` — `TransformViz`, `GradientDescentPlayground`, `DistributionExplorer`, `DraggableGeometry`, `StepThrough` — or build a concept-specific one using `ParamSlider` as the shared control primitive.
+Leads the page if a demo explains the concept better than prose would. Pull from `components/interactive/` — `TransformViz`, `GradientDescentPlayground`, `DistributionExplorer`, `DraggableGeometry`, `VectorViz`, `StepThrough` — or build a concept-specific one using `ParamSlider` as the shared control primitive.
 
 If nothing in `components/interactive/` fits — most concepts outside math/ML won't have a ready-made component (a Git commit DAG, a cache-hierarchy diagram, an options-payoff chart) — don't wait for a new core component to be built. Write the visual inline as freeform HTML/CSS/JS (a `<canvas>`, inline SVG, or plain DOM), wrapped in `Demo` for consistent chrome:
 

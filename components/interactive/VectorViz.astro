@@ -1,0 +1,8 @@
+---
+import VectorViz, { type VectorVizProps } from "./VectorViz.tsx";
+
+export interface Props extends VectorVizProps {}
+const props = Astro.props;
+---
+
+<VectorViz {...props} client:visible />

@@ -48,9 +48,10 @@ astro/        scaffold() integration, config defaults, content-schema.ts (Zod),
 components/
   layout/     Header, Footer, Sidebar, KBFamilyNav, SearchModal, TableOfContents
   notation/   SymbolTooltip, NotationSheet
-  interactive/  ParamSlider, TransformViz, DraggableGeometry, StepThrough,
-                GradientDescentPlayground, DistributionExplorer, PyodideCell, SelfCheck
-                — each also has an .astro wrapper (client:visible baked in) for use in .mdx
+  interactive/  ParamSlider, TransformViz, DraggableGeometry, VectorViz, StepThrough,
+                GradientDescentPlayground, DistributionExplorer, PyodideCell, SelfCheck,
+                Demo (freeform-visual wrapper) — each also has an .astro wrapper
+                (client:visible baked in) for use in .mdx
   graph/      PrereqGraph — directed prerequisite DAG, global + local modes
   content/    ConceptLink, Callout, CodeCell
 styles/       tokens.css, base.css, theme.ts (light/dark/system)

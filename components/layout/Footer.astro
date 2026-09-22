@@ -1,0 +1,12 @@
+---
+import KBFamilyNav from "./KBFamilyNav.astro";
+
+export interface Props {
+  currentKb: string;
+}
+const { currentKb } = Astro.props;
+---
+
+<footer class="family">
+  <KBFamilyNav currentKb={currentKb} />
+</footer>

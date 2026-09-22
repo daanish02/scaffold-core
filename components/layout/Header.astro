@@ -1,0 +1,42 @@
+---
+export interface Props {
+  kb: string;
+}
+const { kb } = Astro.props;
+---
+
+<div class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="Open navigation">☰</button>
+  <div class="brand">Scaffold <span class="kb">{kb}</span></div>
+  <div class="topbar-spacer"></div>
+  <div class="search-hint">⌘K to search</div>
+  <div class="theme-toggle" id="themeToggle">
+    <button type="button" data-mode="light" aria-label="Light mode">☀</button>
+    <button type="button" data-mode="system" aria-label="System">◐</button>
+    <button type="button" data-mode="dark" aria-label="Dark mode">☾</button>
+  </div>
+</div>
+
+<script>
+  import { setTheme, getStoredTheme } from "../../styles/theme.ts";
+
+  const toggle = document.getElementById("themeToggle")!;
+  function syncActive(mode: string) {
+    [...toggle.children].forEach((b) =>
+      b.classList.toggle("active", (b as HTMLElement).dataset.mode === mode),
+    );
+  }
+  toggle.addEventListener("click", (e) => {
+    const btn = (e.target as HTMLElement).closest("button");
+    if (btn?.dataset.mode) {
+      setTheme(btn.dataset.mode as "light" | "dark" | "system");
+      syncActive(btn.dataset.mode);
+    }
+  });
+  syncActive(getStoredTheme());
+
+  document.getElementById("menuBtn")?.addEventListener("click", () => {
+    document.getElementById("sidebar")?.classList.add("open");
+    document.getElementById("overlay")?.classList.add("open");
+  });
+</script>

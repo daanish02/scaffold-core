@@ -1,0 +1,23 @@
+---
+import kbs from "../../registry/kbs.json";
+
+export interface Props {
+  currentKb: string;
+}
+const { currentKb } = Astro.props;
+---
+
+<div class="label">Part of the Scaffold family</div>
+<div class="family-grid">
+  {
+    kbs.map((entry) =>
+      entry.name === currentKb ? (
+        <span class="family-link self">{entry.name}</span>
+      ) : (
+        <a class="family-link" href={entry.url}>
+          {entry.name}
+        </a>
+      ),
+    )
+  }
+</div>

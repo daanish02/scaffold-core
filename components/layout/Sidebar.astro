@@ -1,0 +1,36 @@
+---
+export interface SidebarGroup {
+  label: string;
+  links: { href: string; label: string; current?: boolean }[];
+}
+
+export interface Props {
+  groups: SidebarGroup[];
+}
+const { groups } = Astro.props;
+---
+
+<div class="sidebar-overlay" id="overlay"></div>
+<nav class="sidebar" id="sidebar">
+  {
+    groups.map((group) => (
+      <div class="side-group">
+        <div class="side-group-label">{group.label}</div>
+        {group.links.map((link) => (
+          <a class:list={["side-link", { current: link.current }]} href={link.href}>
+            {link.label}
+          </a>
+        ))}
+      </div>
+    ))
+  }
+</nav>
+
+<script>
+  const sidebar = document.getElementById("sidebar");
+  const overlay = document.getElementById("overlay");
+  overlay?.addEventListener("click", () => {
+    sidebar?.classList.remove("open");
+    overlay?.classList.remove("open");
+  });
+</script>

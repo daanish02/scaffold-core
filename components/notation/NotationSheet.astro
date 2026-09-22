@@ -1,0 +1,131 @@
+---
+export interface SymbolEntry {
+  symbol: string;
+  name: string;
+  pronunciation?: string;
+  meaning: string;
+  example?: string;
+  /** Context variants — same symbol, different meaning across fields. */
+  variants?: { context: string; meaning: string }[];
+}
+
+export interface Props {
+  entries: SymbolEntry[];
+}
+const { entries } = Astro.props;
+
+const greekAlphabet = [
+  ["α", "alpha"],
+  ["β", "beta"],
+  ["γ", "gamma"],
+  ["δ", "delta"],
+  ["ε", "epsilon"],
+  ["ζ", "zeta"],
+  ["η", "eta"],
+  ["θ", "theta"],
+  ["ι", "iota"],
+  ["κ", "kappa"],
+  ["λ", "lambda"],
+  ["μ", "mu"],
+  ["ν", "nu"],
+  ["ξ", "xi"],
+  ["π", "pi"],
+  ["ρ", "rho"],
+  ["σ", "sigma"],
+  ["τ", "tau"],
+  ["υ", "upsilon"],
+  ["φ", "phi"],
+  ["χ", "chi"],
+  ["ψ", "psi"],
+  ["ω", "omega"],
+];
+
+const namingConventions = [
+  { pattern: "bold (e.g. v)", meaning: "vector" },
+  { pattern: "capital (e.g. A)", meaning: "matrix" },
+  { pattern: "hat (e.g. θ̂)", meaning: "estimate" },
+  { pattern: "bar (e.g. x̄)", meaning: "mean" },
+];
+---
+
+<div class="notation-sheet prose">
+  <h2 id="symbols">Symbols</h2>
+  <table class="notation-table">
+    <thead>
+      <tr>
+        <th>Symbol</th>
+        <th>Name</th>
+        <th>Meaning</th>
+        <th>Example</th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        entries.map((entry) => (
+          <tr id={`sym-${entry.name.toLowerCase().replace(/\s+/g, "-")}`}>
+            <td class="notation-symbol">{entry.symbol}</td>
+            <td>
+              {entry.name}
+              {entry.pronunciation && <span class="ink-faint"> ({entry.pronunciation})</span>}
+            </td>
+            <td>{entry.meaning}</td>
+            <td>{entry.example}</td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+
+  <h2 id="greek-alphabet">Greek alphabet</h2>
+  <div class="chip-row">
+    {
+      greekAlphabet.map(([symbol, name]) => (
+        <span class="chip">
+          {symbol} <span class="kb-tag">{name}</span>
+        </span>
+      ))
+    }
+  </div>
+
+  <h2 id="naming-conventions">Naming conventions</h2>
+  <table class="notation-table">
+    <tbody>
+      {
+        namingConventions.map((row) => (
+          <tr>
+            <td>{row.pattern}</td>
+            <td>{row.meaning}</td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .notation-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--sans);
+    font-size: 14.5px;
+    margin: 16px 0 32px;
+  }
+  .notation-table th,
+  .notation-table td {
+    text-align: left;
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .notation-table th {
+    color: var(--ink-faint);
+    font-weight: 500;
+    font-size: 12px;
+  }
+  .notation-symbol {
+    font-family: var(--mono);
+    font-size: 16px;
+  }
+  .ink-faint {
+    color: var(--ink-faint);
+  }
+</style>

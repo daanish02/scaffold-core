@@ -1,4 +1,5 @@
 import mdx from "@astrojs/mdx";
+import react from "@astrojs/react";
 import pagefind from "astro-pagefind";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
@@ -16,7 +17,7 @@ export const remarkPlugins = [remarkMath];
 /** Rehype plugins every Scaffold KB needs for math notation. */
 export const rehypePlugins = [rehypeKatex];
 
-/** Integrations every Scaffold KB needs: MDX content, Pagefind search. */
+/** Integrations every Scaffold KB needs: MDX content, React (for .tsx interactive components), Pagefind search. */
 export function scaffoldIntegrations(): AstroIntegration[] {
-  return [mdx(), pagefind()];
+  return [mdx(), react(), pagefind()];
 }

@@ -3,7 +3,7 @@ import { z } from "astro/zod";
 export const conceptSchema = z.object({
   // Identity
   id: z.string(), // "kb:section:concept" — e.g. "math:linear-algebra:eigenvectors"
-  kb: z.enum(["math", "cs", "hardware", "ml", "dl", "applied-dl", "econ-finance"]),
+  kb: z.enum(["math", "cs", "infrastructure", "ml", "dl", "applied-dl", "econ-finance"]),
   title: z.string(),
   section: z.string(), // level 1 — e.g. "linear-algebra"
 
@@ -56,7 +56,7 @@ export function parseConceptId(id: string): { kb: string; section: string; conce
 const KB_DISPLAY_NAMES: Record<string, string> = {
   math: "Math",
   cs: "CS",
-  hardware: "Hardware",
+  infrastructure: "Infrastructure",
   ml: "ML",
   dl: "DL",
   "applied-dl": "Applied DL",

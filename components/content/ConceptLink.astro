@@ -6,8 +6,10 @@ export interface Props {
   id: string;
   /** Override the link text; defaults to the concept slug from the id. */
   label?: string;
+  /** The KB the linking page belongs to — the kb-tag prefix is only shown when this link crosses KBs. */
+  currentKb?: string;
 }
-const { id, label } = Astro.props;
+const { id, label, currentKb } = Astro.props;
 
 const { kb, section, concept } = parseConceptId(id);
 const entry = kbs.find((k) => k.name === kb);
@@ -17,9 +19,10 @@ if (!entry) {
 
 const href = `${entry.url}/${section}/${concept}`;
 const text = label ?? concept.replace(/-/g, " ");
+const showKbTag = currentKb === undefined || kb !== currentKb;
 ---
 
 <a class="chip" href={href}>
-  <span class="kb-tag">{kb}</span>
+  {showKbTag && <span class="kb-tag">{kb}</span>}
   {text}
 </a>

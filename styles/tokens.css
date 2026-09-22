@@ -1,24 +1,24 @@
 :root {
-  --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --serif: "Newsreader", "Source Serif 4", Georgia, serif;
   --sans: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
   --mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
 
-  /* light (default) */
-  --bg: #f1f3f1;
-  --bg-panel: #fafbfa;
+  /* light (default) — same terminal/cyan identity as dark, inverted for light backgrounds */
+  --bg: #f4f6f6;
+  --bg-panel: #eceff0;
   --bg-raised: #ffffff;
-  --ink: #1c2531;
-  --ink-soft: #4b5563;
-  --ink-faint: #8a93a0;
-  --rule: #d7dcd9;
-  --rule-strong: #b7bfbb;
-  --accent: #2e7a78;
-  --accent-soft: #e4f0ef;
-  --accent-ink: #1b4c4b;
-  --warn: #b36a2e;
-  --warn-soft: #f5e9dc;
-  --chip-bg: #eaeeea;
-  --shadow: 0 1px 2px rgba(28, 37, 49, 0.06), 0 4px 16px rgba(28, 37, 49, 0.04);
+  --ink: #1a1f23;
+  --ink-soft: #4d565e;
+  --ink-faint: #838f97;
+  --rule: #d7dcde;
+  --rule-strong: #b9c1c4;
+  --accent: #178c7a;
+  --accent-soft: #dbf1ec;
+  --accent-ink: #0e6558;
+  --warn: #a8703b;
+  --warn-soft: #f6e8d8;
+  --chip-bg: #eceff0;
+  --shadow: 0 1px 2px rgba(20, 23, 26, 0.06), 0 4px 16px rgba(20, 23, 26, 0.05);
 
   box-sizing: border-box;
   padding-top: env(safe-area-inset-top, 0px);
@@ -27,38 +27,38 @@
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #141a21;
-    --bg-panel: #1a222b;
-    --bg-raised: #202a35;
-    --ink: #e9e7dd;
-    --ink-soft: #b7bcc4;
-    --ink-faint: #737c88;
-    --rule: #2b3540;
-    --rule-strong: #3b4753;
-    --accent: #5fb6b0;
-    --accent-soft: #1e3735;
-    --accent-ink: #8fd1cc;
-    --warn: #d69a5e;
-    --warn-soft: #332619;
-    --chip-bg: #232d38;
-    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 4px 20px rgba(0, 0, 0, 0.24);
+    --bg: #14171a;
+    --bg-panel: #1b1f23;
+    --bg-raised: #21262b;
+    --ink: #e4e7eb;
+    --ink-soft: #9aa4af;
+    --ink-faint: #5c6570;
+    --rule: #2a3037;
+    --rule-strong: #3a4148;
+    --accent: #5fd9c8;
+    --accent-soft: #16332e;
+    --accent-ink: #7ee9da;
+    --warn: #d99f5f;
+    --warn-soft: #33291a;
+    --chip-bg: #1b1f23;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 4px 20px rgba(0, 0, 0, 0.3);
   }
 }
 
 :root[data-theme="dark"] {
-  --bg: #141a21;
-  --bg-panel: #1a222b;
-  --bg-raised: #202a35;
-  --ink: #e9e7dd;
-  --ink-soft: #b7bcc4;
-  --ink-faint: #737c88;
-  --rule: #2b3540;
-  --rule-strong: #3b4753;
-  --accent: #5fb6b0;
-  --accent-soft: #1e3735;
-  --accent-ink: #8fd1cc;
-  --warn: #d69a5e;
-  --warn-soft: #332619;
-  --chip-bg: #232d38;
-  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 4px 20px rgba(0, 0, 0, 0.24);
+  --bg: #14171a;
+  --bg-panel: #1b1f23;
+  --bg-raised: #21262b;
+  --ink: #e4e7eb;
+  --ink-soft: #9aa4af;
+  --ink-faint: #5c6570;
+  --rule: #2a3037;
+  --rule-strong: #3a4148;
+  --accent: #5fd9c8;
+  --accent-soft: #16332e;
+  --accent-ink: #7ee9da;
+  --warn: #d99f5f;
+  --warn-soft: #33291a;
+  --chip-bg: #1b1f23;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 4px 20px rgba(0, 0, 0, 0.3);
 }

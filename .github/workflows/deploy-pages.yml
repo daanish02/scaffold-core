@@ -13,7 +13,18 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  ensure-pages-enabled:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Enable Pages (build via Actions) if not already set up
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api "repos/${{ github.repository }}/pages" >/dev/null 2>&1 || \
+          gh api -X POST "repos/${{ github.repository }}/pages" -f build_type=workflow
+
   build:
+    needs: ensure-pages-enabled
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

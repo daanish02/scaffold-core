@@ -22,6 +22,8 @@ Leads the page if a demo explains the concept better than prose would. Pull from
 
 If the concept doesn't have an obvious visual, it's fine to skip this section — don't force an interactive where a diagram or nothing serves better.
 
+If the interactive has numeric parameters a formula depends on (e.g. a transformation matrix, a learning rate), show that formula live next to the controls, updating as the parameters change — seeing the equation track the slider is a bigger clarity win than only showing it later in "Formal definition." Skip this if the demo isn't formula-driven; not every interactive needs an equation attached.
+
 ### 3. Formal definition
 
 Dense, precise, notation-heavy. This is the section an expert scans on a refresher. Use KaTeX for notation (wired up automatically via `scaffold()`), and wrap symbols in `SymbolTooltip` so hovering/tapping links back to the notation sheet.

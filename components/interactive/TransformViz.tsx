@@ -5,8 +5,14 @@ export interface TransformVizProps {
   initial?: { a: number; b: number; c: number; d: number };
 }
 
-/** Finds the (real) eigenvector directions of a 2x2 matrix [[a,b],[c,d]], normalized. */
-function eigen2x2(a: number, b: number, c: number, d: number): [number, number][] {
+export interface Eigenpair {
+  x: number;
+  y: number;
+  lambda: number;
+}
+
+/** Finds the (real) eigenpairs of a 2x2 matrix [[a,b],[c,d]] — normalized direction + eigenvalue. */
+function eigen2x2(a: number, b: number, c: number, d: number): Eigenpair[] {
   const tr = a + d;
   const det = a * d - b * c;
   const disc = tr * tr - 4 * det;
@@ -14,7 +20,7 @@ function eigen2x2(a: number, b: number, c: number, d: number): [number, number][
   const sq = Math.sqrt(disc);
   const l1 = (tr + sq) / 2;
   const l2 = (tr - sq) / 2;
-  const vecs: [number, number][] = [];
+  const vecs: Eigenpair[] = [];
   for (const l of [l1, l2]) {
     let vx: number, vy: number;
     if (Math.abs(b) > 1e-6) {
@@ -28,7 +34,7 @@ function eigen2x2(a: number, b: number, c: number, d: number): [number, number][
       vy = 0;
     }
     const norm = Math.hypot(vx, vy) || 1;
-    vecs.push([vx / norm, vy / norm]);
+    vecs.push({ x: vx / norm, y: vy / norm, lambda: l });
   }
   return vecs;
 }
@@ -116,7 +122,7 @@ export default function TransformViz({
     const vecs = eigen2x2(a, b, c, d);
     ctx.strokeStyle = accent;
     ctx.lineWidth = 2.5;
-    vecs.forEach(([vx, vy]) => {
+    vecs.forEach(({ x: vx, y: vy, lambda }, i) => {
       const len = 8;
       const [x1, y1] = toScreen(vx * len, vy * len);
       const [x2, y2] = toScreen(-vx * len, -vy * len);
@@ -124,6 +130,28 @@ export default function TransformViz({
       ctx.moveTo(x1, y1);
       ctx.lineTo(x2, y2);
       ctx.stroke();
+
+      // place label a short, fixed distance from the origin along the
+      // line, offset perpendicular to it so text sits beside the stroke
+      // (not clipped off-canvas at the tip, and not drawn on top of it)
+      ctx.font = "12px monospace";
+      const eqLine = Math.abs(vx) < 1e-6 ? "x = 0" : `y = ${(vy / vx).toFixed(2)}x`;
+      const label = `λ = ${lambda.toFixed(2)}  (${eqLine})`;
+      const labelLen = 2.2 + i * 1.4;
+      const [lx0, ly0] = toScreen(vx * labelLen, vy * labelLen);
+      const px = -vy,
+        py = vx;
+      const perpOffset = 14;
+      const textW = ctx.measureText(label).width;
+      const lx = lx0 + px * perpOffset - textW / 2;
+      const ly = ly0 + py * perpOffset;
+
+      ctx.fillStyle = getCssVar("--bg-raised");
+      ctx.globalAlpha = 0.85;
+      ctx.fillRect(lx - 3, ly - 11, textW + 6, 15);
+      ctx.globalAlpha = 1;
+      ctx.fillStyle = accent;
+      ctx.fillText(label, lx, ly);
     });
 
     if (vecs.length === 0) {

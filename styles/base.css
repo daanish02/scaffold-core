@@ -387,6 +387,38 @@ input[type="range"] {
   line-height: 1.5;
 }
 
+.prereq-graph {
+  font-family: var(--sans);
+}
+.prereq-edge {
+  stroke: var(--rule-strong);
+  stroke-width: 1.5;
+}
+.prereq-edge-cross-kb {
+  stroke: var(--accent);
+  stroke-dasharray: 4 3;
+}
+.prereq-node circle {
+  fill: var(--bg-raised);
+  stroke: var(--ink-soft);
+  stroke-width: 1.5;
+}
+circle.prereq-node-focus {
+  fill: var(--accent-soft);
+  stroke: var(--accent);
+}
+.prereq-node text {
+  font-size: 12px;
+  fill: var(--ink);
+}
+.prereq-label-hover {
+  fill: var(--accent-ink);
+  font-weight: 500;
+}
+.prereq-node {
+  cursor: pointer;
+}
+
 .self-check {
   display: flex;
   flex-direction: column;

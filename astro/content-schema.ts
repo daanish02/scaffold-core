@@ -52,3 +52,18 @@ export function parseConceptId(id: string): { kb: string; section: string; conce
   const [kb, section, concept] = parts;
   return { kb, section, concept };
 }
+
+const KB_DISPLAY_NAMES: Record<string, string> = {
+  math: "Math",
+  cs: "CS",
+  hardware: "Hardware",
+  ml: "ML",
+  dl: "DL",
+  "applied-dl": "Applied DL",
+  "econ-finance": "Econ & Finance",
+};
+
+/** Maps a kb enum value (e.g. "applied-dl") to its display name (e.g. "Applied DL"). */
+export function kbDisplayName(kb: string): string {
+  return KB_DISPLAY_NAMES[kb] ?? kb;
+}

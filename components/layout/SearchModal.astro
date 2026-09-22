@@ -1,0 +1,46 @@
+---
+import Search from "astro-pagefind/components/Search";
+---
+
+<dialog id="searchModal" class="search-modal">
+  <Search id="search" className="search-modal-body" uiOptions={{ showImages: false }} />
+</dialog>
+
+<script>
+  const dialog = document.getElementById("searchModal") as HTMLDialogElement | null;
+
+  function open() {
+    dialog?.showModal();
+    dialog?.querySelector("input")?.focus();
+  }
+
+  document.querySelectorAll<HTMLElement>("[data-search-trigger]").forEach((el) => {
+    el.addEventListener("click", open);
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+      e.preventDefault();
+      open();
+    }
+  });
+
+  dialog?.addEventListener("click", (e) => {
+    if (e.target === dialog) dialog.close();
+  });
+</script>
+
+<style>
+  .search-modal {
+    width: min(560px, 90vw);
+    max-height: 70vh;
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 16px;
+    background: var(--bg-raised);
+    color: var(--ink);
+  }
+  .search-modal::backdrop {
+    background: rgba(0, 0, 0, 0.35);
+  }
+</style>

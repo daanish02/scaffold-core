@@ -1,4 +1,7 @@
 ---
+import SearchModal from "./SearchModal.astro";
+import { kbDisplayName } from "../../astro/content-schema.ts";
+
 export interface Props {
   kb: string;
 }
@@ -7,15 +10,17 @@ const { kb } = Astro.props;
 
 <div class="topbar">
   <button class="menu-btn" id="menuBtn" aria-label="Open navigation">☰</button>
-  <div class="brand">Scaffold <span class="kb">{kb}</span></div>
+  <div class="brand">Scaffold <span class="kb">{kbDisplayName(kb)}</span></div>
   <div class="topbar-spacer"></div>
-  <div class="search-hint">⌘K to search</div>
+  <button type="button" class="search-hint" data-search-trigger>⌘K to search</button>
   <div class="theme-toggle" id="themeToggle">
     <button type="button" data-mode="light" aria-label="Light mode">☀</button>
     <button type="button" data-mode="system" aria-label="System">◐</button>
     <button type="button" data-mode="dark" aria-label="Dark mode">☾</button>
   </div>
 </div>
+
+<SearchModal />
 
 <script>
   import { setTheme, getStoredTheme } from "../../styles/theme.ts";

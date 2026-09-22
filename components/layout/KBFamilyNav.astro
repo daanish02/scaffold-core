@@ -1,5 +1,6 @@
 ---
 import kbs from "../../registry/kbs.json";
+import { kbDisplayName } from "../../astro/content-schema.ts";
 
 export interface Props {
   currentKb: string;
@@ -12,10 +13,10 @@ const { currentKb } = Astro.props;
   {
     kbs.map((entry) =>
       entry.name === currentKb ? (
-        <span class="family-link self">{entry.name}</span>
+        <span class="family-link self">{kbDisplayName(entry.name)}</span>
       ) : (
         <a class="family-link" href={entry.url}>
-          {entry.name}
+          {kbDisplayName(entry.name)}
         </a>
       ),
     )

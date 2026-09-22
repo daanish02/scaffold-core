@@ -5,8 +5,15 @@ export interface Props {
   currentKb: string;
 }
 const { currentKb } = Astro.props;
+const year = new Date().getFullYear();
 ---
 
 <footer class="family">
   <KBFamilyNav currentKb={currentKb} />
+  <div class="footer-meta">
+    <span>© {year} · CC BY-NC-SA 4.0</span>
+    <a href="https://github.com/daanish02/scaffold-core/blob/main/docs/AUTHORING.md"
+      >How this content is written</a
+    >
+  </div>
 </footer>

@@ -81,3 +81,21 @@ hasInteractive: true
 `id` is namespaced as `kb:section:concept`, not a URL — this is what makes cross-repo links stable even if a KB restructures its folder layout. See `content-schema.ts` for the full field list, and `registry/README.md` for how `kb` values map to live KB sites.
 
 CI runs `validate-graph.ts` (no dangling prerequisites, no cycles) and `check-links.ts` (every `ConceptLink` resolves) on every PR — fix any failures there before merging.
+
+## Known MDX gotchas
+
+**Whitespace around inline components.** MDX/JSX trims whitespace around adjacent inline tags — text immediately followed by a component tag on the same logical sentence loses its space:
+
+```mdx
+A vector <SymbolTooltip ...>$\vec{v}$</SymbolTooltip> in $\mathbb{R}^n$ is...
+```
+
+renders as "A vectorv in..." with no space before/after the tooltip. Fix with an explicit `{" "}`:
+
+```mdx
+A vector{" "}
+<SymbolTooltip ...>$\vec{v}$</SymbolTooltip>{" "}
+in $\mathbb{R}^n$ is...
+```
+
+This bites any concept page that inlines `SymbolTooltip` or another inline component mid-sentence, not just this one component.
